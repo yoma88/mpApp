@@ -1,0 +1,157 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "160a1c1aac76c9bb68e2f4015f17efba",
+    "entities": [
+      {
+        "tableName": "producto",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idProducto` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `descripcion` TEXT NOT NULL, `sku` TEXT NOT NULL, `skuProveedor` TEXT, `cantidad1Unidad` TEXT, `cantidad2Unidad` TEXT, `cantidad3Unidad` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "IdProducto",
+            "columnName": "idProducto",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Descripcion",
+            "columnName": "descripcion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "SKU",
+            "columnName": "sku",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "SKUProveedor",
+            "columnName": "skuProveedor",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Cantidad1Unidad",
+            "columnName": "cantidad1Unidad",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Cantidad2Unidad",
+            "columnName": "cantidad2Unidad",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "Cantidad3Unidad",
+            "columnName": "cantidad3Unidad",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idProducto"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_producto_descripcion",
+            "unique": false,
+            "columnNames": [
+              "descripcion"
+            ],
+            "createSql": "CREATE  INDEX `index_producto_descripcion` ON `${TABLE_NAME}` (`descripcion`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "productoAlmacen",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`idProductoAlmacen` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `idProducto` INTEGER NOT NULL, `sku` TEXT NOT NULL, `cantidad1` INTEGER NOT NULL, `cantidad2` INTEGER NOT NULL, `cantidad3` INTEGER NOT NULL, FOREIGN KEY(`idProducto`) REFERENCES `producto`(`idProducto`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "IdProductoAlmacen",
+            "columnName": "idProductoAlmacen",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "IdProducto",
+            "columnName": "idProducto",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "SKU",
+            "columnName": "sku",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Cantidad1",
+            "columnName": "cantidad1",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Cantidad2",
+            "columnName": "cantidad2",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Cantidad3",
+            "columnName": "cantidad3",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "idProductoAlmacen"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_productoAlmacen_sku",
+            "unique": false,
+            "columnNames": [
+              "sku"
+            ],
+            "createSql": "CREATE  INDEX `index_productoAlmacen_sku` ON `${TABLE_NAME}` (`sku`)"
+          },
+          {
+            "name": "index_productoAlmacen_idProducto",
+            "unique": false,
+            "columnNames": [
+              "idProducto"
+            ],
+            "createSql": "CREATE  INDEX `index_productoAlmacen_idProducto` ON `${TABLE_NAME}` (`idProducto`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "producto",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "idProducto"
+            ],
+            "referencedColumns": [
+              "idProducto"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"160a1c1aac76c9bb68e2f4015f17efba\")"
+    ]
+  }
+}

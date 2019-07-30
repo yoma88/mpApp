@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.mpapp.views.MainActivity">
+    <item
+        android:id="@+id/registrarOpcion"
+        android:orderInCategory="100"
+        android:title="Registrar"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/listarOpcion"
+        android:orderInCategory="100"
+        android:title="Listar"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/enviarOpcion"
+        android:orderInCategory="100"
+        android:title="Enviar"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/actualizarOpcion"
+        android:orderInCategory="100"
+        android:title="Actualizar Maestros"
+        app:showAsAction="never" />
+</menu>
