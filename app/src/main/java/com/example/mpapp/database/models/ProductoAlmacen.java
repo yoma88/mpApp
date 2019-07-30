@@ -2,9 +2,11 @@ package com.example.mpapp.database.models;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Index;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
 import java.util.Date;
@@ -18,7 +20,7 @@ import java.util.Date;
 public class ProductoAlmacen {
 
     @PrimaryKey(autoGenerate = false)
-     @ColumnInfo(name = "sku")
+    @ColumnInfo(name = "sku")
     @NonNull
     private String SKU;
 
@@ -33,10 +35,69 @@ public class ProductoAlmacen {
 
     @ColumnInfo(name = "fecha")
     @NonNull
+    @TypeConverters({DateConverter.class})
     private Date Fecha;
 
     @ColumnInfo(name = "solicitar")
     private boolean Solicitar;
+
+    @NonNull
+    public String getSKU() {
+        return SKU;
+    }
+
+    public void setSKU(@NonNull String SKU) {
+        this.SKU = SKU;
+    }
+
+    public int getCantidadProveedor() {
+        return CantidadProveedor;
+    }
+
+    public void setCantidadProveedor(int cantidadProveedor) {
+        CantidadProveedor = cantidadProveedor;
+    }
+
+    public int getCantidadEstandar() {
+        return CantidadEstandar;
+    }
+
+    public void setCantidadEstandar(int cantidadEstandar) {
+        CantidadEstandar = cantidadEstandar;
+    }
+
+    public int getCantidadAlternativa() {
+        return CantidadAlternativa;
+    }
+
+    public void setCantidadAlternativa(int cantidadAlternativa) {
+        CantidadAlternativa = cantidadAlternativa;
+    }
+
+    @NonNull
+    public Date getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(@NonNull Date fecha) {
+        Fecha = fecha;
+    }
+
+    public boolean isSolicitar() {
+        return Solicitar;
+    }
+
+    public void setSolicitar(boolean solicitar) {
+        Solicitar = solicitar;
+    }
+
+    public int getCantidadSolicitada() {
+        return CantidadSolicitada;
+    }
+
+    public void setCantidadSolicitada(int cantidadSolicitada) {
+        CantidadSolicitada = cantidadSolicitada;
+    }
 
     @ColumnInfo(name = "cantidadSolicitada")
     private int CantidadSolicitada;
@@ -52,6 +113,7 @@ public class ProductoAlmacen {
         this.CantidadSolicitada = CantidadSolicitada;
     }
 
+    @Ignore
     public ProductoAlmacen() {
     }
 

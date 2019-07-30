@@ -2,6 +2,7 @@ package com.example.mpapp.database.models;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
@@ -121,7 +122,7 @@ public class Producto {
     @ColumnInfo(name = "unidadAlternativa")
     private String UnidadAlternativa;
 
-    @ColumnInfo(name = "unidadAlternativa")
+    @ColumnInfo(name = "unidadAlternativaFlag")
     private boolean UnidadAlternativaFlag;
 
     @ColumnInfo(name = "estado")
@@ -140,6 +141,7 @@ public class Producto {
         this.UnidadAlternativaFlag = UnidadAlternativaFlag;
     }
 
+    @Ignore
     public Producto() {
     }
 

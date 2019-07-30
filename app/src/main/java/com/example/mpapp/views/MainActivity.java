@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -25,12 +27,22 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     EditText skuText;
     Button skuSearchButton;
+    LinearLayout infoProveedorSection;
+    LinearLayout infoEstandarSection;
+    LinearLayout infoAlternativaSection;
     EditText skuProveedorText;
     Button skuProveedorSearchButton;
     TextView productoDescripcionText;
-    NumberPicker cantidad1Text;
-    NumberPicker cantidad2Text;
-    NumberPicker cantidad3Text;
+    NumberPicker cantidadProveedorText;
+    NumberPicker cantidadEstandarText;
+    NumberPicker cantidadAlternativaText;
+
+    TextView unidadProveedorText;
+    TextView unidadEstandarText;
+    TextView unidadAlternativaText;
+
+    CheckBox solicitarCheckBox;
+    NumberPicker cantidadSolicitadaText;
     Button guardarButton;
 
     @Override
@@ -44,18 +56,27 @@ public class MainActivity extends AppCompatActivity {
 
         //INSERT DATA TO TEST APP
         ProductoDao productoDao = ProductosDatabase.getDatabase(context).productoDao();
-        Producto producto = new Producto("Prod1","1235","1235","1","2","3");
-        Producto producto1 = new Producto("Prod2","1111","1111","5","7","9");
+        Producto producto = new Producto("Prod1","1235","1235","1",true,"2",false,"3", true);
+        Producto producto1 = new Producto("Prod2","1111","1111","1",true,"2",true,"3", false);
+
         productoDao.insert(producto);
         productoDao.insert(producto1);
         //-----------------------
 
+        infoProveedorSection = findViewById(R.id.infoProveedorDiv);
+        infoEstandarSection = findViewById(R.id.infoEstandarDiv);
+        infoAlternativaSection = findViewById(R.id.infoAlternativaDiv);
         skuText = findViewById(R.id.skuText);
         skuProveedorText = findViewById(R.id.skuProvText);
         productoDescripcionText = findViewById(R.id.descripcionText);
-        cantidad1Text = findViewById(R.id.cant1Text);
-        cantidad2Text = findViewById(R.id.cant2Text);
-        cantidad3Text = findViewById(R.id.cant3Text);
+        cantidadProveedorText = findViewById(R.id.cantProveedorText);
+        cantidadEstandarText = findViewById(R.id.cantEstandarText);
+        cantidadAlternativaText = findViewById(R.id.cantAlternativaText);
+        unidadProveedorText = findViewById(R.id.unidadProveedorText);
+        unidadEstandarText = findViewById(R.id.unidadEstandarText);
+        unidadAlternativaText = findViewById(R.id.unidadAlternativaText);
+        solicitarCheckBox = findViewById(R.id.solicitarCheckBox);
+        cantidadSolicitadaText = findViewById(R.id.cantSolicitadaText);
 
         skuSearchButton = findViewById(R.id.skuSearchButton);
         skuSearchButton.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 ProductoDao productoDao = ProductosDatabase.getDatabase(context).productoDao();
                 Producto productoBD = productoDao.findProductoBySku(skuText.getText().toString());
 
-                productoDescripcionText.setText(productoBD.getDescripcion());
+                llenarInformacionProducto(productoBD);
             }
         });
 
@@ -75,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 ProductoDao productoDao = ProductosDatabase.getDatabase(getApplicationContext()).productoDao();
                 Producto productoBD = productoDao.findProductoBySkuProveedor(skuProveedorText.getText().toString());
 
-                productoDescripcionText.setText(productoBD.getDescripcion());
+                llenarInformacionProducto(productoBD);
             }
         });
 
@@ -97,13 +118,33 @@ public class MainActivity extends AppCompatActivity {
     {
         ProductoAlmacen productoAlmacen = new ProductoAlmacen();
         productoAlmacen.setSKU(skuText.getText().toString());
-        productoAlmacen.setCantidad1(cantidad1Text.getValue());
-        productoAlmacen.setCantidad2(cantidad2Text.getValue());
-        productoAlmacen.setCantidad3(cantidad3Text.getValue());
-
+        productoAlmacen.setCantidadProveedor(cantidadProveedorText.getValue());
+        productoAlmacen.setCantidadEstandar(cantidadEstandarText.getValue());
+        productoAlmacen.setCantidadProveedor(cantidadAlternativaText.getValue());
+        productoAlmacen.setSolicitar(solicitarCheckBox.isChecked());
+        productoAlmacen.setCantidadSolicitada(cantidadSolicitadaText.getValue());
         return productoAlmacen;
     }
 
+    public void llenarInformacionProducto(Producto productoBD)
+    {
+        productoDescripcionText.setText(productoBD.getDescripcion());
+        if(productoBD.isUnidadProveedorFlag())
+        {
+            infoProveedorSection.setVisibility(View.VISIBLE);
+            unidadProveedorText.setText(productoBD.getUnidadProveedor());
+        }
+        else if(productoBD.isUnidadEstandarFlag())
+        {
+            infoEstandarSection.setVisibility(View.VISIBLE);
+            unidadEstandarText.setText(productoBD.getUnidadEstandar());
+        }
+        else if(productoBD.isUnidadAlternativaFlag())
+        {
+            infoAlternativaSection.setVisibility(View.VISIBLE);
+            unidadAlternativaText.setText(productoBD.getUnidadAlternativa());
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -103,32 +103,85 @@
 
     </LinearLayout>
 
+
+    <TextView
+        android:layout_width="131dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginTop="25dip"
+        android:layout_marginLeft="30dip"
+        android:text="CANTIDADES:"
+        android:textStyle="bold" />
+
     <LinearLayout
+        android:id="@+id/infoProveedorDiv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="30dip"
         android:layout_marginRight="30dip"
-        android:layout_marginTop="30dip">
+        android:layout_marginTop="30dip"
+        android:visibility="gone">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dip"
-            android:text="CANT1:"/>
-
-        <NumberPicker
-            android:id="@+id/cant1Text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:inputType="number" />
-
-        <TextView
-            android:id="@+id/cant1UnidadText"
+            android:id="@+id/unidadProveedorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"/>
+
+        <NumberPicker
+            android:id="@+id/cantProveedorText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/infoEstandarDiv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
+        android:layout_marginTop="30dip"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/unidadEstandarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"/>
+
+        <NumberPicker
+            android:id="@+id/cantEstandarText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/infoAlternativaDiv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
+        android:layout_marginTop="30dip"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/unidadAlternativaText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"/>
+
+        <NumberPicker
+            android:id="@+id/cantAlternativaText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
@@ -143,21 +196,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dip"
-            android:text="CANT2:"/>
-
-        <NumberPicker
-            android:id="@+id/cant2Text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:inputType="number" />
-
-        <TextView
-            android:id="@+id/cant2UnidadText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"/>
+            android:layout_marginRight="10dip"
+            android:text="Solicitar:"/>
+
+        <CheckBox
+            android:id="@+id/solicitarCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
@@ -170,23 +216,16 @@
         android:layout_marginTop="30dip">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dip"
-            android:text="CANT3:"/>
-
-        <NumberPicker
-            android:id="@+id/cant3Text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:inputType="number" />
-
-        <TextView
-            android:id="@+id/cant3UnidadText"
+            android:id="@+id/unidadSolicitadaText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"/>
+
+        <NumberPicker
+            android:id="@+id/cantSolicitadaText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 
